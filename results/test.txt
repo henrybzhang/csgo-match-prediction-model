@@ -1,0 +1,50 @@
+k: 0.1
+Predicted 2013 out of 3160 games correctly.
+Percentage: 63.7025%
+Mean Squared Error: 0.318689
+
+k: 0.2
+Predicted 2007 out of 3160 games correctly.
+Percentage: 63.5127%
+Mean Squared Error: 0.325175
+
+k: 0.3
+Predicted 2021 out of 3160 games correctly.
+Percentage: 63.9557%
+Mean Squared Error: 0.331145
+
+k: 0.4
+Predicted 1994 out of 3160 games correctly.
+Percentage: 63.1013%
+Mean Squared Error: 0.338968
+
+k: 0.5
+Predicted 1978 out of 3160 games correctly.
+Percentage: 62.5949%
+Mean Squared Error: 0.345913
+
+k: 0.6
+Predicted 1971 out of 3160 games correctly.
+Percentage: 62.3734%
+Mean Squared Error: 0.350449
+
+k: 0.7
+Predicted 1959 out of 3160 games correctly.
+Percentage: 61.9937%
+Mean Squared Error: 0.354223
+
+k: 0.8
+Predicted 1950 out of 3160 games correctly.
+Percentage: 61.7089%
+Mean Squared Error: 0.357997
+
+k: 0.9
+Predicted 1947 out of 3160 games correctly.
+Percentage: 61.6139%
+Mean Squared Error: 0.361251
+
+k: 1
+Predicted 1944 out of 3160 games correctly.
+Percentage: 61.519%
+Mean Squared Error: 0.363991
+

@@ -1,0 +1,5 @@
+k: 0.1
+Predicted 2013 out of 3160 games correctly.
+Percentage: 63.7025%
+Mean Squared Error: 0.318689
+

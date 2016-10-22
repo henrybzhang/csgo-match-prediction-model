@@ -1,7 +1,6 @@
-// implement HGA from http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html
 #include <fstream>
-#include <algorithm> // sort
-#include <cmath> // math functions
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 using namespace std;
 

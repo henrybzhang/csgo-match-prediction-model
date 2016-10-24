@@ -1,2 +1,2 @@
-1783 14 dust2 Threats 2 nxl 16 roseau nxl 20  8 3 7 1.81 BnTeT nxl 19  7 7 4 1.81 FrostMisty nxl 22  13 3 10 1.80 frgd nxl 17  5 5 7 1.51 NoMEz Threats 11  5 0 16 0.76 soifong nxl 6  1 3 8 0.76 d@rklord Threats 9  4 0 18 0.51 huyak Threats 7  3 3 17 0.37 cLb Threats 6  1 0 17 0.36 Fog Threats 3  3 1 16 0.23 
-
+419 21 dust2_se NiP 16 Imaginary 9 f0rest NiP 35  15 6 14 2.20 friberg NiP 25  14 1 16 1.48 GeT_RiGhT NiP 17  8 6 11 1.21 MAJ3R Imaginary 21  15 2 21 0.99 shox Imaginary 19  11 0 18 0.99 Uzzziii Imaginary 19  8 4 21 0.86 Xizt NiP 14  6 7 17 0.82 Fifflaren NiP 14  3 6 17 0.80 Ozstrik3r Imaginary 8  4 5 22 0.37 mshz Imaginary 8  5 6 23 0.33
+1788 18 cache ENCE 16 LDLC 13 juho ENCE 23  6 4 15 1.40 xms LDLC 23  20 1 19 1.14 suNny ENCE 21  11 2 19 1.11 Aleksib ENCE 17  9 5 14 1.09 mistou LDLC 21  11 1 21 0.93 ALEX LDLC 12  10 1 13 0.86 to1nou LDLC 14  5 1 18 0.83 arvid ENCE 14  4 2 16 0.81 naSu ENCE 15  9 3 17 0.81 Ex6TenZ LDLC 11  7 3 19 0.66

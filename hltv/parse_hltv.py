@@ -61,8 +61,9 @@ def get_special_player(link):
 
 def get_match_data():
 	f = open('data.txt', 'w')
-	match_links = ['/?pageid=188&matchid=36995'] #test array
+	match_links = ['/?pageid=188&matchid=13654', '/?pageid=188&matchid=37425'] #test array
 	for i in range(len(match_links)):
+		time.sleep(2)
 		match_page = requests.get('http://www.hltv.org' + match_links[i], headers=headers)
 		match_page_tree = html.fromstring(match_page.content)
 
@@ -77,6 +78,7 @@ def get_match_data():
 		assists = match_page_tree.xpath('//div[@style="padding-left:5px;padding-top:5px;"]/div[4]/text()')
 		deaths = match_page_tree.xpath('//div[@style="padding-left:5px;padding-top:5px;"]/div[5]/text()')
 		hltv_rating = match_page_tree.xpath('//div[@style="padding-left:5px;padding-top:5px;"]/div[10]/text()')
+		new_hltv_rating = match_page_tree.xpath('//div[@style="padding-left:5px;padding-top:5px;"]/div[9]/text()')
 
 		#format data
 		team_names = [x.replace(' ', '', 1) for x in team_names]
@@ -126,9 +128,14 @@ def get_match_data():
 			print 'http://www.hltv.org' + match_links[i], '\n'
 			continue
 		if len(hltv_rating) != 10:
-			print "Error: hltv_rating", hltv_rating, len(hltv_rating)
-			print 'http://www.hltv.org' + match_links[i], '\n'
-			continue
+			#new format for later matches in hltv
+			#hltv_rating is in div[9] instead of div[10]
+			if len(new_hltv_rating) == 10:
+				hltv_rating = new_hltv_rating
+			else:
+				print "Error: hltv_rating", hltv_rating, len(hltv_rating)
+				print 'http://www.hltv.org' + match_links[i], '\n'
+				continue
 		
 		print 'http://www.hltv.org' + match_links[i]
 
@@ -137,8 +144,7 @@ def get_match_data():
 			print >>f, n, s,
 		for p, t, k, h, a, d, h_r in zip(players, team, kills, headshots, assists, deaths, hltv_rating):
 			print >>f, p, t, k, h, a, d, h_r,
-		print >>f, '\n'
-		time.sleep(2)
+		print >>f
 	f.close()
 
 

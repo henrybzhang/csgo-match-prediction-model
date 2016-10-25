@@ -1,4 +1,4 @@
-//basic skeleton of elo system
+//elo system + maps
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -12,17 +12,19 @@ const int N_games_needed_for_map = 4;
 int total_N_matches, total_N_players;
 
 int player_index[2][5], map_index;
-bool enough_games, could_not_find_player;
+double team_average[2];
 
-double team_average[2], team_map_average[2];
+bool enough_games;
 
 int game_counter, N_correct_predictions;
 double mean_squared_error;
 
 struct match_stats
 {
-    int date, score[2];
-    string map_name, player_name[2][5], team_name[2];
+    int date, hour;
+    int score[2], player_kills[2][5], player_headshots[2][5], player_assists[2][5], player_deaths[2][5];
+    string map_name, player_name[2][5], team_name[2], player_team[2][5];
+    double player_hltv_ratings[2][5];
 };
 struct player_stats
 {
@@ -39,13 +41,21 @@ void input_data()
     fin >> total_N_matches;
     match = new match_stats[total_N_matches];
     for(int m=0; m<total_N_matches; m++){
-        fin >> match[m].date >> match[m].map_name;
+        fin >> match[m].date >> match[m].hour >> match[m].map_name;
 
-        fin >> match[m].team_name[0] >> match[m].score[0];
-        for(int y=0; y<5; y++) fin >> match[m].player_name[0][y];
+        for(int x=0; x<2; x++) fin >> match[m].team_name[x] >> match[m].score[x];
+        for(int x=0; x<2; x++){
+            for(int y=0; y<2; y++){
+                fin >> match[m].player_name[x][y];
+                fin >> match[m].player_team[x][y];
+                fin >> match[m].player_kills[x][y];
+                fin >> match[m].player_headshots[x][y];
+                fin >> match[m].player_assists[x][y];
+                fin >> match[m].player_deaths[x][y];
+                fin >> match[m].player_hltv_ratings[x][y];
+            }
+        }
 
-        fin >> match[m].team_name[1] >> match[m].score[1];
-        for(int y=0; y<5; y++) fin >> match[m].player_name[1][y];
     }
     fin.close();
 
@@ -54,6 +64,11 @@ void input_data()
     player = new player_stats[total_N_players];
     for(int m=0; m<total_N_players; m++) pin >> player[m].name;
     pin.close();
+}
+
+bool sort_by_date(const match_stats &match1, const match_stats &match2)
+{
+    return match1.date < match2.date;
 }
 
 void reset_program()
@@ -69,22 +84,24 @@ void reset_program()
     mean_squared_error = game_counter = N_correct_predictions = 0;
 }
 
-void which_map(int match_number)
+bool find_map_index(int match_number)
 {
     if(match[match_number].map_name == "dust2") map_index = 0;
-    if(match[match_number].map_name == "mirage") map_index = 1;
-    if(match[match_number].map_name == "inferno") map_index = 2;
-    if(match[match_number].map_name == "cache") map_index = 3;
-    if(match[match_number].map_name == "overpass") map_index = 4;
-    if(match[match_number].map_name == "cobblestone") map_index = 5;
-    if(match[match_number].map_name == "train") map_index = 6;
-    if(match[match_number].map_name == "nuke") map_index = 7;
+    else if(match[match_number].map_name == "mirage") map_index = 1;
+    else if(match[match_number].map_name == "inferno") map_index = 2;
+    else if(match[match_number].map_name == "cache") map_index = 3;
+    else if(match[match_number].map_name == "overpass") map_index = 4;
+    else if(match[match_number].map_name == "cobblestone") map_index = 5;
+    else if(match[match_number].map_name == "train") map_index = 6;
+    else if(match[match_number].map_name == "nuke") map_index = 7;
+    else return false;
+
+    return true;
 }
 
-void find_player_positions(int match_number)
+bool find_player_positions(int match_number)
 {
     enough_games = true;
-    could_not_find_player = false;
     for(int x=0; x<2; x++){
         for(int y=0; y<5; y++){
             for(int p=0; p<total_N_players; p++){
@@ -92,60 +109,34 @@ void find_player_positions(int match_number)
                     player_index[x][y] = p;
                     if(player[p].total_number_of_games < N_games_needed || player[p].map_number_of_games[map_index] < N_games_needed_for_map){
                         enough_games = false;
-                        return;  
-                    } 
+                    }
                     break;
                 }
                 if(p == total_N_players - 1){ // if player's name is not found in player name array
                     cout << match[match_number].player_name[x][y] << endl;
-                    could_not_find_player = true;
                     cout << "Error: could not find player '" << match[match_number].player_name[x][y] << "'" << endl;
                     cout << "Match Number: " << match_number + 1 << endl;
-                    return;
+                    return false;
                 }
             }
         }
     }
+    return true;
 }
 
-void find_team_average()
+void find_team_average(double k)
 {
     for(int x=0; x<2; x++){
         team_average[x] = 0;
-        for(int y=0; y<5; y++) team_average[x] += player[player_index[x][y]].overall_rating;
+        for(int y=0; y<5; y++){
+            p = player_index[x][y];
+            team_average[x] += (player[p].map_rating[map_index] * k + player[p].overall_rating * (1 - k));
+        }
         team_average[x] /= 5;
     }
 }
 
-double find_team_map_average()
-{
-    for(int x=0; x<2; x++){
-        team_map_average[x] = 0;
-        double overall_average = 0;
-        int N_ratings = 0;
-        for(int y=0; y<5; y++){
-            // get overall average for all maps in the team
-            if(player[pn[x][y]].mapn[map_number] == 0 && player[pn[x][y]].overN_of_mapr[map_number] == false) return 0; // not enough information to predict map advantage
-            if(player[pn[x][y]].overN_of_mapr[map_number] == true){
-                N_ratings += N_of_mapr;
-                for(int z=0; z<N_of_mapr; z++) overall_average += player[pn[x][y]].weighted_ratings[map_number][z];
-            }
-            else{
-                N_ratings += player[pn[x][y]].mapn[map_number];
-                for(int z=0; z<player[pn[x][y]].mapn[map_number]; z++) overall_average += player[pn[x][y]].weighted_ratings[map_number][z];
-            }
-            
-            // get average for the map being played on
-            if(player[pn[x][y]].overN_of_mapr[map_number] == true) team_map_average[x] += get_mean(N_of_mapr, player[pn[x][y]].weighted_ratings[map_number]);
-            else team_map_average[x] += get_mean(player[pn[x][y]].mapn[map_number], player[pn[x][y]].weighted_ratings[map_number]);
-        }
-        overall_average /= N_ratings;
-        team_map_average[x] /= 5;
-        return (overall_average - team_average[x]) / overall_average;
-    }
-}
-
-void update_player_ratings(int match_number, double k)
+void update_player_index(int match_number, double k)
 {
     for(int x=0; x<2; x++){
         int counter = 1 - x;
@@ -160,20 +151,17 @@ void update_player_ratings(int match_number, double k)
         for(int y=0; y<5; y++){
             int p = player_index[x][y];
             int game_number = player[p].total_number_of_games;
-            player[p].weighted_ratings[game_number] = weighted_score;
-            player[p].actual_ratings[game_number] = base_score;
-            player[p].total_weighted_ratings[game_number] = weighted_score;
+
+            player[p].map_number_of_games[map_index]++;
             player[p].total_number_of_games++;
 
             double expected_score = 1 / (1 + exp(team_average[counter] - player[p].overall_rating));
             player[p].overall_rating += k * (base_score - expected_score);
+
+            // could make map ratings more or less flexible
+            player[p].map_rating[map_index] += k * (base_score - expected_score);
         }
     }
-}
-
-bool sort_by_rating(const player_stats &p1, const player_stats &p2)
-{
-    return p1.overall_rating>p2.overall_rating;
 }
 
 void output_data()
@@ -183,7 +171,7 @@ void output_data()
     // get rid of players with less than the necessary number of games
     int subtract = 0;
     for(int x=0; x<total_N_players; x++){
-        if(player[x].total_number_of_games < N_games_needed){
+        if(player[x].total_number_of_games < N_games_needed || player[p].map_number_of_games[map_index] < N_games_needed_for_map){
             player[x].overall_rating = 0;
             subtract++;
         }
@@ -216,16 +204,19 @@ double get_standard_deviation(int N, double mean, double score_array[])
 }
 
 double cdf(double value)
-{
+{   
    return 0.5 * erfc(-value * 1 / sqrt(2));
 }
 
-double test_program(int match_number)
+double test_program(int match_number, double k)
 {
     double standard_deviation[2], mean[2];
     for(int x=0; x<2; x++){
         double team_player_ratings[5];
-        for(int y=0; y<5; y++) team_player_ratings[y] = player[player_index[x][y]].overall_rating;
+        for(int y=0; y<5; y++){
+            int p = player_index[x][y];
+            team_player_ratings[y] = player[p].map_rating[map_index] * k + player[p].overall_rating * (1 - k);
+        }
         mean[x] = get_mean(5, team_player_ratings);
         standard_deviation[x] = get_standard_deviation(5, mean[x], team_player_ratings);
     }
@@ -241,11 +232,12 @@ double test_program(int match_number)
 
 
 ofstream fout ("../results/base_predictions.txt");
-void output_tests(double k)
+void output_tests(double elo_constant, double map_constant)
 {
-    fout << "k: " << k << endl;
+    fout << "Elo Constant: " << elo_constant << endl;
+    fout << "Map Constant: " << map_constant << endl;
     fout << "Predicted " << N_correct_predictions << " out of " << game_counter << " games correctly." << endl;
-    fout << "Percentage: " << (double) N_correct_predictions / game_counter  * 100 << '%' << endl;
+    fout << "Percentage: " << (double) N_correct_predictions / game_counter * 100 << '%' << endl;
     fout << "Mean Squared Error: " << mean_squared_error / game_counter << endl << endl;
 }
 
@@ -253,24 +245,27 @@ void output_tests(double k)
 int main()
 {
     input_data();
+    sort(match, match + total_N_matches, sort_by_date);
 
     // try different constants to see which works best
     for(int constant1=1; constant1<=10; constant1++){
         for(int constant2=1; constant2<=10; constant2++){
             reset_program();
-            double K = (double) constant1 / 10;
-            double map_constant = (double) constant2 / 10;
+            double elo_constant = (double) constant1 / 10;
+            double map_constant = (double) constant2 / 10; // has to be between 0 and 1
             for(int m=0; m<total_N_matches; m++){
-                find_player_positions(m);
-                if(could_not_find_player == true) continue;
-                find_team_average();
+                // necessary information
+                if(find_player_index(m) == false) continue;
+                if(find_map_index(m) == false) continue;
+                find_team_average(map_constant);
 
-                //test the program here
+                // test the program here
                 if(enough_games == true) test_program(m);
-                update_player_ratings(m, K);
+
+                update_player_ratings(m, elo_constant);
             }
-            output_tests(constant);
-            //output_data();
+            output_tests(elo_constant, map_constant);
+            // output_data();
         }
     }
 }

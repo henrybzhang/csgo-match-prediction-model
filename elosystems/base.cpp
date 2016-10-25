@@ -9,6 +9,7 @@ using namespace std;
 const int N_games_needed = 30;
 
 int total_N_matches, total_N_players;
+
 int player_index[2][5];
 double team_average[2];
 
@@ -204,9 +205,9 @@ int main()
     input_data();
 
     // try different constants to see which works best
-    for(int K=1; K<=1; K++){
+    for(int constant1=1; constant1<=1; constant1++){
         reset_program();
-        double K_constant = (double) K / 10;
+        double elo_constant = (double) constant1 / 10;
         for(int m=0; m<total_N_matches; m++){
             find_player_positions(m);
             if(could_not_find_player == true) continue;
@@ -214,9 +215,9 @@ int main()
 
             //test the program here
             if(enough_games == true) test_program(m);
-            update_player_ratings(m, K_constant);
+            update_player_ratings(m, elo_constant);
         }
-        output_tests(constant);
+        output_tests(elo_constant);
         //output_data();
     }
 }

@@ -5,18 +5,26 @@ using namespace std;
 int main()
 {
     ifstream fin ("monbrey_stats.txt");
-    double total_error = 0;
+    double error = 0;
+    int predicted_correct = 0;
     int N = 0;
     while(!fin.eof()){
+        int win;
+        double percentA, percentB;
         N++;
-        for(int x=0; x<3; x++){
-            int win;
-            double percentA, percentB;
-            fin >> win >> percentA >> percentB;
-            if(win == 1) total_error += (1 - percentA) * (1 - percentA);
-            if(win == 0) total_error += (1 - percentB) * (1 - percentB);
+        fin >> win >> percentA >> percentB;
+        percentA *= 0.01;
+        percentB *= 0.01;
+        if(win == 1){
+            error += (1 - percentA) * (1 - percentA);
+            if(percentA > 0.5) total_correct++;
+        }
+        if(win == 0){
+            error += (1 - percentB) * (1 - percentB);
+            if(percentB > 0.5) total_correct++;
         }
     }
-    total_error /= N;
-    cout << total_error << endl;
+    error /= N;
+    cout << "CSGOLounge Error: " << error << endl;
+    cout << "Percentage Correct: " << (double) predicted_correct / N << endl;
 }

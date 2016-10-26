@@ -11,6 +11,7 @@ headers = {
 }
 
 match_links = []
+player_list = []
 month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 def get_match_links():
@@ -36,7 +37,7 @@ def get_match_links():
 	f.close()
 
 def input_match_links():
-	f = open('match_links.txt', 'r')
+	f = open('../data_files/match_links.txt', 'r')
 	global match_links
 	match_links = f.readlines()
 	f.close()
@@ -58,10 +59,14 @@ def get_special_player(link):
 
 	return player_name
 		
+def get_player_names(name_list):
+	global player_list
+	for i in name_list:
+		player_list.append(i)
 
 def get_match_data():
-	f = open('data.txt', 'w')
-	match_links = ['/?pageid=188&matchid=13654', '/?pageid=188&matchid=37425'] #test array
+	f = open('../data_files/raw_data.txt', 'w')
+	match_links = ['/?pageid=188&matchid=37651', '/?pageid=188&matchid=37650'] #test array
 	for i in range(len(match_links)):
 		time.sleep(2)
 		match_page = requests.get('http://www.hltv.org' + match_links[i], headers=headers)
@@ -88,6 +93,7 @@ def get_match_data():
 		headshots = [x.replace('(', '') for x in headshots]
 		headshots = [x.replace(')', '') for x in headshots]
 		hour_of_day = date[11:13];
+		map_name = map_name.split('_')[0]
 		#print date[5:7] + '-' + date[8:10] + '-' + date[:4], hour_of_day
 		date = (int(date[:4]) - 2012) * 365 + (int(date[5:7])) * month[int(date[5:7]) - 1] + (int(date[8:10]) - 1)
 		
@@ -101,7 +107,7 @@ def get_match_data():
 		if len(players) != 10:
 			#Scaper doesn't work with players with the character '@' in their name
 			#Most likely only one player per match has that
-			if len(players) == 9:
+			if len(players) <= 9:
 				players = get_special_player(match_links[i]);
 				if len(players) != 10:
 					print "Error: players", len(players)
@@ -145,8 +151,13 @@ def get_match_data():
 		for p, t, k, h, a, d, h_r in zip(players, team, kills, headshots, assists, deaths, hltv_rating):
 			print >>f, p, t, k, h, a, d, h_r,
 		print >>f
+		get_player_names(players)
 	f.close()
 
+def sort_player_names():
+	f = open('../data_files/player_names.txt', 'w')
+	print >>f, '\n'.join(list(set(player_list)))
 
-input_match_links()
+#input_match_links()
 get_match_data()
+sort_player_names()

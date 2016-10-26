@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    ifstream fin ("monbrey_stats.txt");
+    ifstream fin ("../data_files/monbrey_stats.txt");
     double error = 0;
     int predicted_correct = 0;
     int N = 0;
@@ -17,11 +17,11 @@ int main()
         percentB *= 0.01;
         if(win == 1){
             error += (1 - percentA) * (1 - percentA);
-            if(percentA > 0.5) total_correct++;
+            if(percentA > 0.5) predicted_correct++;
         }
         if(win == 0){
             error += (1 - percentB) * (1 - percentB);
-            if(percentB > 0.5) total_correct++;
+            if(percentB > 0.5) predicted_correct++;
         }
     }
     error /= N;

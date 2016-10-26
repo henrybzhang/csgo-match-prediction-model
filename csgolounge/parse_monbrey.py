@@ -24,9 +24,9 @@ def read_table():
 		if teamA_wins[i] == 'teamA':
 			teamA_wins[i] = '0'
 		else:
-			teamA_wins[i] = '1'
+			teamA_wins[i] = '1' # teamB wins
 
-	f = open('monbrey_stats.txt', 'w')
+	f = open('../data_files/monbrey_stats.txt', 'w')
 	for A, B, percentA, percentB in zip(teamA_wins, teamB_wins, teamA, teamB):
 		if B == 'teamB' and A == '0':
 			continue

@@ -1,0 +1,600 @@
+Elo Constant: 0.1
+Map Constant: 0.1
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.302429
+
+Elo Constant: 0.1
+Map Constant: 0.2
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.300127
+
+Elo Constant: 0.1
+Map Constant: 0.3
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.298317
+
+Elo Constant: 0.1
+Map Constant: 0.4
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.296214
+
+Elo Constant: 0.1
+Map Constant: 0.5
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.295363
+
+Elo Constant: 0.1
+Map Constant: 0.6
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.296118
+
+Elo Constant: 0.1
+Map Constant: 0.7
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.298949
+
+Elo Constant: 0.1
+Map Constant: 0.8
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.305551
+
+Elo Constant: 0.1
+Map Constant: 0.9
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: 0.316581
+
+Elo Constant: 0.1
+Map Constant: 1
+Predicted 4696 out of 7277 games correctly.
+Percentage: 64.5321%
+Mean Squared Error: nan
+
+Elo Constant: 0.2
+Map Constant: 0.1
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.315479
+
+Elo Constant: 0.2
+Map Constant: 0.2
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.309542
+
+Elo Constant: 0.2
+Map Constant: 0.3
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.305184
+
+Elo Constant: 0.2
+Map Constant: 0.4
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.302771
+
+Elo Constant: 0.2
+Map Constant: 0.5
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.302333
+
+Elo Constant: 0.2
+Map Constant: 0.6
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.305278
+
+Elo Constant: 0.2
+Map Constant: 0.7
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.311989
+
+Elo Constant: 0.2
+Map Constant: 0.8
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.320984
+
+Elo Constant: 0.2
+Map Constant: 0.9
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: 0.331869
+
+Elo Constant: 0.2
+Map Constant: 1
+Predicted 4647 out of 7277 games correctly.
+Percentage: 63.8587%
+Mean Squared Error: nan
+
+Elo Constant: 0.3
+Map Constant: 0.1
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.322255
+
+Elo Constant: 0.3
+Map Constant: 0.2
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.313985
+
+Elo Constant: 0.3
+Map Constant: 0.3
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.309267
+
+Elo Constant: 0.3
+Map Constant: 0.4
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.306981
+
+Elo Constant: 0.3
+Map Constant: 0.5
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.309163
+
+Elo Constant: 0.3
+Map Constant: 0.6
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.314522
+
+Elo Constant: 0.3
+Map Constant: 0.7
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.321803
+
+Elo Constant: 0.3
+Map Constant: 0.8
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.330647
+
+Elo Constant: 0.3
+Map Constant: 0.9
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: 0.34082
+
+Elo Constant: 0.3
+Map Constant: 1
+Predicted 4616 out of 7277 games correctly.
+Percentage: 63.4327%
+Mean Squared Error: nan
+
+Elo Constant: 0.4
+Map Constant: 0.1
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.325348
+
+Elo Constant: 0.4
+Map Constant: 0.2
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.315366
+
+Elo Constant: 0.4
+Map Constant: 0.3
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.310771
+
+Elo Constant: 0.4
+Map Constant: 0.4
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.311126
+
+Elo Constant: 0.4
+Map Constant: 0.5
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.315136
+
+Elo Constant: 0.4
+Map Constant: 0.6
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.320712
+
+Elo Constant: 0.4
+Map Constant: 0.7
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.328602
+
+Elo Constant: 0.4
+Map Constant: 0.8
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.337418
+
+Elo Constant: 0.4
+Map Constant: 0.9
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: 0.345966
+
+Elo Constant: 0.4
+Map Constant: 1
+Predicted 4586 out of 7277 games correctly.
+Percentage: 63.0205%
+Mean Squared Error: nan
+
+Elo Constant: 0.5
+Map Constant: 0.1
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.327165
+
+Elo Constant: 0.5
+Map Constant: 0.2
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.31709
+
+Elo Constant: 0.5
+Map Constant: 0.3
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.313392
+
+Elo Constant: 0.5
+Map Constant: 0.4
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.315192
+
+Elo Constant: 0.5
+Map Constant: 0.5
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.318749
+
+Elo Constant: 0.5
+Map Constant: 0.6
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.325466
+
+Elo Constant: 0.5
+Map Constant: 0.7
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.333915
+
+Elo Constant: 0.5
+Map Constant: 0.8
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.341964
+
+Elo Constant: 0.5
+Map Constant: 0.9
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: 0.349407
+
+Elo Constant: 0.5
+Map Constant: 1
+Predicted 4587 out of 7277 games correctly.
+Percentage: 63.0342%
+Mean Squared Error: nan
+
+Elo Constant: 0.6
+Map Constant: 0.1
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.329974
+
+Elo Constant: 0.6
+Map Constant: 0.2
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.318278
+
+Elo Constant: 0.6
+Map Constant: 0.3
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.315439
+
+Elo Constant: 0.6
+Map Constant: 0.4
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.31823
+
+Elo Constant: 0.6
+Map Constant: 0.5
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.322809
+
+Elo Constant: 0.6
+Map Constant: 0.6
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.329844
+
+Elo Constant: 0.6
+Map Constant: 0.7
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.337732
+
+Elo Constant: 0.6
+Map Constant: 0.8
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.345102
+
+Elo Constant: 0.6
+Map Constant: 0.9
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: 0.351825
+
+Elo Constant: 0.6
+Map Constant: 1
+Predicted 4557 out of 7277 games correctly.
+Percentage: 62.622%
+Mean Squared Error: nan
+
+Elo Constant: 0.7
+Map Constant: 0.1
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.331922
+
+Elo Constant: 0.7
+Map Constant: 0.2
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.319518
+
+Elo Constant: 0.7
+Map Constant: 0.3
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.317941
+
+Elo Constant: 0.7
+Map Constant: 0.4
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.320705
+
+Elo Constant: 0.7
+Map Constant: 0.5
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.326501
+
+Elo Constant: 0.7
+Map Constant: 0.6
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.333202
+
+Elo Constant: 0.7
+Map Constant: 0.7
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.340394
+
+Elo Constant: 0.7
+Map Constant: 0.8
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.347199
+
+Elo Constant: 0.7
+Map Constant: 0.9
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: 0.353187
+
+Elo Constant: 0.7
+Map Constant: 1
+Predicted 4520 out of 7277 games correctly.
+Percentage: 62.1135%
+Mean Squared Error: nan
+
+Elo Constant: 0.8
+Map Constant: 0.1
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.334001
+
+Elo Constant: 0.8
+Map Constant: 0.2
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.320787
+
+Elo Constant: 0.8
+Map Constant: 0.3
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.319995
+
+Elo Constant: 0.8
+Map Constant: 0.4
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.323178
+
+Elo Constant: 0.8
+Map Constant: 0.5
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.329406
+
+Elo Constant: 0.8
+Map Constant: 0.6
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.336032
+
+Elo Constant: 0.8
+Map Constant: 0.7
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.342415
+
+Elo Constant: 0.8
+Map Constant: 0.8
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.348928
+
+Elo Constant: 0.8
+Map Constant: 0.9
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: 0.354072
+
+Elo Constant: 0.8
+Map Constant: 1
+Predicted 4488 out of 7277 games correctly.
+Percentage: 61.6738%
+Mean Squared Error: nan
+
+Elo Constant: 0.9
+Map Constant: 0.1
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.33596
+
+Elo Constant: 0.9
+Map Constant: 0.2
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.322039
+
+Elo Constant: 0.9
+Map Constant: 0.3
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.322034
+
+Elo Constant: 0.9
+Map Constant: 0.4
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.32574
+
+Elo Constant: 0.9
+Map Constant: 0.5
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.33178
+
+Elo Constant: 0.9
+Map Constant: 0.6
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.337995
+
+Elo Constant: 0.9
+Map Constant: 0.7
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.344173
+
+Elo Constant: 0.9
+Map Constant: 0.8
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.350088
+
+Elo Constant: 0.9
+Map Constant: 0.9
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: 0.354682
+
+Elo Constant: 0.9
+Map Constant: 1
+Predicted 4464 out of 7277 games correctly.
+Percentage: 61.344%
+Mean Squared Error: nan
+
+Elo Constant: 1
+Map Constant: 0.1
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.338696
+
+Elo Constant: 1
+Map Constant: 0.2
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.323389
+
+Elo Constant: 1
+Map Constant: 0.3
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.323823
+
+Elo Constant: 1
+Map Constant: 0.4
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.327977
+
+Elo Constant: 1
+Map Constant: 0.5
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.333607
+
+Elo Constant: 1
+Map Constant: 0.6
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.339606
+
+Elo Constant: 1
+Map Constant: 0.7
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.345636
+
+Elo Constant: 1
+Map Constant: 0.8
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.351095
+
+Elo Constant: 1
+Map Constant: 0.9
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: 0.355151
+
+Elo Constant: 1
+Map Constant: 1
+Predicted 4428 out of 7277 games correctly.
+Percentage: 60.8493%
+Mean Squared Error: nan
+

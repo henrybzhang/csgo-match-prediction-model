@@ -12,8 +12,10 @@ The data used in this project is scraped from HLTV.org using the requests librar
 
 First, the data is formatted. Pro player in-game names are parsed from the original data file and placed into a separate text file. Matches are sorted by the date they were played.
 	
-Currently, the program only makes a prediction on a match when each player in it has played at least 30 matches beforehand. From this, there is a total of 584 different pro players and 3160 matche outcomes being predicted.
-The basic implementation of the Elo rating system using **K**=0.3 predicts 2021 games correctly with a mean squared error 0.331145. On the other hand, suprisingly,  **K**=0.1 predicts 2013 games correctly with a mean squared error of 0.318689.
+Currently, the program only makes a prediction on a match when each player in it has played at least 30 matches beforehand. From this, there is a total of 1175 different pro players and 8435 match outcomes being predicted.
+The basic implementation of the Elo rating system using **K**=0.1 predicts 5436 games correctly with a mean squared error 0.302432.
 
-Additionally, there are two other programs that add on to the basic implementation: `with_date.cpp` weights a player’s match score history based on how far into the past it was played when determining player ratings; `with_map.cpp` gives each player a different rating on all (8) maps.
+Additionally, `new_map.cpp` gives each player a different rating on all (8) maps.
 
+## References
+[CDF Function](http://stackoverflow.com/questions/2328258/cumulative-normal-distribution-function-in-c-c) 

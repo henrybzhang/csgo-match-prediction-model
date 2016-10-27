@@ -86,17 +86,6 @@ void reset_program()
 
 bool find_map_index(int match_number)
 {
-<<<<<<< Updated upstream
-    if(match[match_number].map_name == "dust2") map_index = 0;
-    else if(match[match_number].map_name == "mirage") map_index = 1;
-    else if(match[match_number].map_name == "inferno") map_index = 2;
-    else if(match[match_number].map_name == "cache") map_index = 3;
-    else if(match[match_number].map_name == "overpass") map_index = 4;
-    else if(match[match_number].map_name == "cobblestone") map_index = 5;
-    else if(match[match_number].map_name == "train") map_index = 6;
-    else if(match[match_number].map_name == "nuke") map_index = 7;
-    else return false;
-=======
     if(match[m].map_name == "dust2") map_index = 0;
     else if(match[m].map_name == "mirage") map_index = 1;
     else if(match[m].map_name == "inferno") map_index = 2;
@@ -110,8 +99,6 @@ bool find_map_index(int match_number)
         cout << "Match Number: " << m + 1 << endl;
         return false;
     }
->>>>>>> Stashed changes
-
     return true;
 }
 
@@ -129,14 +116,8 @@ bool find_player_positions(int match_number)
                     break;
                 }
                 if(p == total_N_players - 1){ // if player's name is not found in player name array
-<<<<<<< Updated upstream
-                    cout << match[match_number].player_name[x][y] << endl;
-                    cout << "Error: could not find player '" << match[match_number].player_name[x][y] << "'" << endl;
-                    cout << "Match Number: " << match_number + 1 << endl;
-=======
                     cout << "Error: Could not find player '" << match[m].player_name[x][y] << "'" << endl;
                     cout << "Match Number: " << m + 1 << endl;
->>>>>>> Stashed changes
                     return false;
                 }
             }
@@ -159,23 +140,15 @@ void find_team_map_average(double map_constant)
     for(int x=0; x<2; x++){
         team_map_average[x] = 0;
         for(int y=0; y<5; y++){
-<<<<<<< Updated upstream
-            p = player_index[x][y];
-            team_average[x] += (player[p].map_rating[map_index] * k + player[p].overall_rating * (1 - k));
-=======
             int p = player_index[x][y];
             team_map_average[x] += (player[p].map_rating[map_index] * map_constant + player[p].overall_rating * (1 - map_constant));
->>>>>>> Stashed changes
         }
         team_map_average[x] /= 5;
     }
 }
 
-<<<<<<< Updated upstream
-void update_player_index(int match_number, double k)
-=======
+
 void update_player_ratings(int m, double elo_constant, double map_constant)
->>>>>>> Stashed changes
 {
     for(int x=0; x<2; x++){
         int counter = 1 - x;
@@ -204,10 +177,14 @@ void update_player_ratings(int m, double elo_constant, double map_constant)
     }
 }
 
+bool sort_by_rating(const player_stats &p1, const player_stats &p2)
+{
+    return p1.overall_rating>p2.overall_rating;
+}
+
+ofstream output_results ("../results/map_player_stats.txt");
 void output_data()
 {
-    ofstream output_results ("../results/base_player_stats.txt");
-
     // get rid of players with less than the necessary number of games
     int subtract = 0;
     for(int x=0; x<total_N_players; x++){
@@ -217,12 +194,10 @@ void output_data()
         }
     }
     sort(player, player + total_N_players, sort_by_rating);
-    total_N_players -= subtract;
+    int players_over_necessary_games = total_N_players - subtract;
 
-    output_results << total_N_players << endl;
-    for(int p=0; p<total_N_players; p++) output_results << player[p].name << " " << player[p].overall_rating << endl;
-
-    output_results.close();
+    output_results << players_over_necessary_games << endl;
+    for(int p=0; p<players_over_necessary_games; p++) output_results << player[p].name << " " << player[p].overall_rating << endl;
 }
 
 
@@ -288,15 +263,10 @@ int main()
     sort(match, match + total_N_matches, sort_by_date);
 
     // try different constants to see which works best
-<<<<<<< Updated upstream
-    for(int constant1=1; constant1<=10; constant1++){
-        for(int constant2=1; constant2<=10; constant2++){
-=======
     for(int constant_1=1; constant_1<=10; constant_1++){
         for(int constant_2=1; constant_2<=10; constant_2++){
             cout << "Elo_Constant: " << constant_1 << endl;
             cout << "Map_Constant: " << constant_2 << endl << endl;
->>>>>>> Stashed changes
             reset_program();
             double elo_constant = (double) constant1 / 10;
             double map_constant = (double) constant2 / 10; // has to be between 0 and 1

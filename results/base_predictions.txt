@@ -1,5 +1,4 @@
-k: 0.1
-Predicted 2013 out of 3160 games correctly.
-Percentage: 63.7025%
-Mean Squared Error: 0.318689
-
+Elo Constant: 0.1
+Predicted 5436 out of 8435 games correctly.
+Percentage: 64.4458%
+Mean Squared Error: 0.302432

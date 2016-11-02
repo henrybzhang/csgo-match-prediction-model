@@ -6,7 +6,7 @@
 #include <cmath>
 #include "headers/match_stats.h"
 using namespace std;
-/*
+
 // # of games a player must play to be tested in the prediction model
 const int N_games_needed = 30;
 
@@ -222,10 +222,10 @@ void output_tests(double elo_constant)
     fout << "Percentage: " << (double) N_correct_predictions / game_counter  * 100 << '%' << endl;
     fout << "Mean Squared Error: " << mean_squared_error / game_counter << endl << endl;
 }
-*/
+
 int main()
 {
-    /*input_data();
+    input_data();
 
     // try different constants to see which works best
     for(int constant_1=1; constant_1<=10; constant_1++){
@@ -243,8 +243,5 @@ int main()
         }
         output_tests(elo_constant);
         //output_data();
-    }*/
-
-    match_stats match;
-    match.input_data();
+    }
 }

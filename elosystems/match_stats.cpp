@@ -2,9 +2,6 @@
 #include <fstream>  
 
 void match_stats::input_data() {
-    std::ifstream fin ("../data/data.txt"); //input match data
-    int total_N_matches;
-    fin >> total_N_matches;
     fin >> date >> hour >> map_name;
     for(int x=0; x<2; x++){
         fin >> team_name[x] >> score[x];

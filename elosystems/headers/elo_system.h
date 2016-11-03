@@ -3,10 +3,12 @@
 
 class elo_system {
 	bool enough_games;
-	int player_index[2][5];
+	int player_index[2][5];	
 	double team_average[2];
+	double elo_constant;
+	int match_index;
 public:
-	void find_player_index(int);
+	bool find_player_index();
 	void find_team_average();
 	void update_player_ratings();
 };

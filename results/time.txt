@@ -1,0 +1,2 @@
+input.input_data() elapsed time: 0.0310002s
+elo_system.find_player_index() elapsed time: ~24.5s

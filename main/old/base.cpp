@@ -38,7 +38,7 @@ player_stats* player;
 
 void input_data()
 {
-    ifstream fin ("../data_files/data.txt"); //input match data
+    ifstream fin ("../data/data.txt"); //input match data
     fin >> total_N_matches;
     match = new match_stats[total_N_matches];
     for(int m=0; m<total_N_matches; m++){
@@ -61,7 +61,7 @@ void input_data()
     }
     fin.close();
 
-    ifstream pin ("../data_files/player_names.txt"); //input player names
+    ifstream pin ("../data/player_names.txt"); //input player names
     pin >> total_N_players;
     player = new player_stats[total_N_players];
     for(int m=0; m<total_N_players; m++) pin >> player[m].name;
@@ -111,7 +111,7 @@ void find_team_average()
     }
 }
 
-void update_player_ratings(int m, double k)
+void update_player_ratings(int m, double elo_constant)
 {
     for(int x=0; x<2; x++){
         int counter = 1 - x;
@@ -127,7 +127,7 @@ void update_player_ratings(int m, double k)
             int p = player_index[x][y];
             player[p].number_of_games++;
             double expected_score = 1 / (1 + exp(team_average[counter] - player[p].rating));
-            player[p].rating += k * (base_score - expected_score);
+            player[p].rating += elo_constant * (base_score - expected_score);
         }
     }
 }
@@ -137,10 +137,9 @@ bool sort_by_rating(const player_stats &p1, const player_stats &p2)
     return p1.rating>p2.rating;
 }
 
+ofstream output_results ("../results/base_player_stats.txt");
 void output_data()
 {
-    ofstream output_results ("../results/base_player_stats.txt");
-
     // get rid of players with less than the necessary number of games
     int subtract = 0;
     for(int x=0; x<total_N_players; x++){
@@ -154,8 +153,6 @@ void output_data()
 
     output_results << total_N_players << endl;
     for(int p=0; p<total_N_players; p++) output_results << player[p].name << " " << player[p].rating << endl;
-
-    output_results.close();
 }
 
 
@@ -230,7 +227,7 @@ int main()
     input_data();
 
     // try different constants to see which works best
-    for(int constant_1=1; constant_1<=10; constant_1++){
+    for(int constant_1=1; constant_1<=1; constant_1++){
         cout << "Constant_1: " << constant_1 << endl;
         reset_program();
         double elo_constant = (double) constant_1 / 10;
@@ -239,11 +236,11 @@ int main()
             find_team_average();
 
             //test the program here
-            if(enough_games == true) test_program(m);
+            //if(enough_games == true) test_program(m);
 
             update_player_ratings(m, elo_constant);
         }
-        output_tests(elo_constant);
-        //output_data();
+        //output_tests(elo_constant);
+        output_data();
     }
 }

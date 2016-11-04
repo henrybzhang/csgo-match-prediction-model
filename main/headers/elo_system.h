@@ -10,14 +10,24 @@ class elo_system {
 	double elo_constant;
 	int match_index;
 	std::string* player_names;
+	int game_counter, N_correct_predictions;
+	double mean_squared_error;
+
 	bool sort_by_rating(const player_stats, const player_stats);
-public:
 	void find_player_index();
 	void find_team_average();
 	void update_player_ratings();
-	void main_program(int);
 	void output_ratings();
 	void reset_program();
+
+	double get_mean(int, double[]);
+	double get_standard_deviation(int, double, double[]);
+	double cdf(double);
+	void swap(double&, double&);
+	void test_program();
+	void output_tests();
+public:
+	void main_program(int);
 };
 
 #endif

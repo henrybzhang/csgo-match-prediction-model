@@ -85,17 +85,6 @@ void elo_system::update_player_ratings() {
     }
 }
 
-void elo_system::main_program(int constant1) {
-    elo_constant = (double) constant1 / 10;
-    reset_program();
-    for(match_index=0; match_index<total_matches.size(); match_index++) {
-        find_player_index();
-        find_team_average();
-        update_player_ratings();
-    }
-    output_ratings();
-}
-
 void elo_system::output_ratings() {
     std::ofstream output_ratings ("../results/main_player_stats.txt");
     // get rid of players with less than the necessary number of games
@@ -115,8 +104,83 @@ void elo_system::reset_program() {
     for(int x=0; x<total_players.size(); x++) {
         total_players[x].reset_player_stats();
     }
+    game_counter = N_correct_predictions = mean_squared_error = 0;
+}
+
+double elo_system::get_mean(int N, double score_array[]) {
+    double total = 0;
+    for(int x=0; x<N; x++) total += score_array[x];
+    total /= N;
+    return total;
+}
+
+double elo_system::get_standard_deviation(int N, double mean, double score_array[]) {
+    double total = 0;
+    for(int x=0; x<N; x++) total += (mean - score_array[x]) * (mean - score_array[x]);
+    total /= (N - 1);
+    total = sqrt(total);
+    return total;
+}
+
+double elo_system::cdf(double value) {
+   return 0.5 * erfc(-value * 1 / sqrt(2));
+}
+
+void elo_system::swap(double &n1, double &n2) {
+     double temp = n1;
+     n1 = n2;
+     n2 = temp;
+}
+
+void elo_system::test_program() {
+    double standard_deviation[2], mean[2];
+    for(int x=0; x<2; x++){
+        double team_player_ratings[5];
+        for(int y=0; y<5; y++){
+            int p = player_index[x][y];
+            team_player_ratings[y] = total_players[p].get_rating();
+        }
+        mean[x] = get_mean(5, team_player_ratings);
+        standard_deviation[x] = get_standard_deviation(5, mean[x], team_player_ratings);
+    }
+
+    std::cout << total_matches[match_index].team0_wins << '\n';
+    if(team_average[0] > team_average[1] && total_matches[match_index].team0_wins == true) N_correct_predictions++;
+    else if(team_average[0] < team_average[1] && total_matches[match_index].team0_wins == false) N_correct_predictions++;
+    game_counter++;
+
+    //make mean[0] the winning team's mean rating
+    if(total_matches[match_index].team0_wins == false){
+        swap(mean[0], mean[1]);
+        swap(standard_deviation[0], standard_deviation[1]);
+    }
+
+    double zscore = (mean[0] - mean[1]) / sqrt((standard_deviation[0] * standard_deviation[0]) + (standard_deviation[1] * standard_deviation[1]));
+    double probability = cdf(zscore);
+    mean_squared_error += (1 - probability) * (1 - probability);
+}
+
+void elo_system::output_tests() {
+    std::ofstream output_tests ("../results/main_predictions.txt");
+    output_tests << "Elo Constant: " << elo_constant << '\n';
+    output_tests << "Predicted " << N_correct_predictions << " out of " << game_counter << " games correctly." << '\n';
+    output_tests << "Percentage: " << (double) N_correct_predictions / game_counter  * 100 << '%' << '\n';
+    output_tests << "Mean Squared Error: " << mean_squared_error / game_counter << '\n' << '\n';
+}
+
+void elo_system::main_program(int constant1) {
+    elo_constant = (double) constant1 / 10;
     player_names = new std::string[total_players.size()];
     for(int x=0; x<total_players.size(); x++) {
         player_names[x] = total_players[x].get_player_name();
     }
+    reset_program();
+    for(match_index=0; match_index<total_matches.size(); match_index++) {
+        find_player_index();
+        find_team_average();
+        if(enough_games == true) test_program();
+        update_player_ratings();
+    }
+    output_ratings();
+    output_tests();
 }

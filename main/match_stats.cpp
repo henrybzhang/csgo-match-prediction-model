@@ -9,6 +9,7 @@ void match_stats::input_match_data(std::ifstream& match_input) {
         match_input >> team_name[x] >> score[x];
     }
     if(score[0] > score[1]) team0_wins = true;
+    else team0_wins = false;
     for(int x=0; x<2; x++){
         for(int y=0; y<5; y++){
             match_input >> player_name[x][y];

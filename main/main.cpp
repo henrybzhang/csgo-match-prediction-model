@@ -18,16 +18,16 @@ input base;
 elo_system rank_system;
 
 int main() {
-	std::chrono::time_point<std::chrono::system_clock> start, end;
-	start = std::chrono::system_clock::now();
-
 	base.input_data();
 	
 	for(int constant1=1; constant1<=1; constant1++) {
 		rank_system.main_program(constant1);
 	}
-	
-	end = std::chrono::system_clock::now();
-	std::chrono::duration<double> elapsed_seconds = end - start;
-	std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
 }
+/*
+std::chrono::time_point<std::chrono::system_clock> start, end;
+start = std::chrono::system_clock::now();
+end = std::chrono::system_clock::now();
+std::chrono::duration<double> elapsed_seconds = end - start;
+std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+*/

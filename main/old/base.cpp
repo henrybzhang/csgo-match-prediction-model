@@ -4,7 +4,6 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#include "headers/match_stats.h"
 using namespace std;
 
 // # of games a player must play to be tested in the prediction model
@@ -228,7 +227,7 @@ int main()
     input_data();
 
     // try different constants to see which works best
-    for(int constant_1=1; constant_1<=10; constant_1++){
+    for(int constant_1=1; constant_1<=1; constant_1++){
         cout << "Constant_1: " << constant_1 << endl;
         reset_program();
         double elo_constant = (double) constant_1 / 10;
@@ -237,11 +236,11 @@ int main()
             find_team_average();
 
             //test the program here
-            if(enough_games == true) test_program(m);
+            //if(enough_games == true) test_program(m);
 
             update_player_ratings(m, elo_constant);
         }
-        output_tests(elo_constant);
-        //output_data();
+        //output_tests(elo_constant);
+        output_data();
     }
 }

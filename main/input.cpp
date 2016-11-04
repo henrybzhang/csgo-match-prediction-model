@@ -4,8 +4,10 @@
 #include <fstream>
 #include <vector>
 
+extern std::vector<match_stats> total_matches;
+extern std::vector<player_stats> total_players;
+
 void input::input_data() {
-	extern std::vector<match_stats> total_matches;
 	std::ifstream match_input ("../data/data.txt");
 	match_input >> total_N_matches;
 	match_stats match;
@@ -15,7 +17,6 @@ void input::input_data() {
     }
     match_input.close();
 
-    extern std::vector<player_stats> total_players;
     std::ifstream player_input ("../data/player_names.txt");
     player_input >> total_N_players;
     player_stats player;
@@ -24,4 +25,12 @@ void input::input_data() {
     	total_players.push_back(player);
     }
     player_input.close();
+}
+
+int input::get_N_players() {
+	return total_N_players;
+}
+
+int input::get_N_matches() {
+	return total_N_matches;
 }

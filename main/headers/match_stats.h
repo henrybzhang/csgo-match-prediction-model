@@ -11,7 +11,7 @@ class match_stats {
 public:
     bool team0_wins;
     void input_match_data(std::ifstream&);
-    std::string get_player_name(int, int);
+    std::string match_player_name(int, int);
     double get_score(int);
     void output_data();
 };

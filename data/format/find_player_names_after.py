@@ -9,7 +9,8 @@ def get_unique_names():
 				player_list.append(words[i * 7])
 
 	f = open('../player_names.txt', 'w')
-	player_list.sort()
-	print >>f, len(set(player_list))
-	print >>f, '\n'.join(set(player_list))
+	player_list = list(set(player_list))
+	player_list.sort();
+	print >>f, len(player_list)
+	print >>f, '\n'.join(player_list)
 get_unique_names()

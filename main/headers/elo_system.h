@@ -9,6 +9,7 @@ class elo_system {
 	double team_average[2];
 	double elo_constant;
 	int match_index;
+	std::string* player_names;
 	bool sort_by_rating(const player_stats, const player_stats);
 public:
 	void find_player_index();

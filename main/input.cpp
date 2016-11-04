@@ -26,11 +26,3 @@ void input::input_data() {
     }
     player_input.close();
 }
-
-int input::get_N_players() {
-	return total_N_players;
-}
-
-int input::get_N_matches() {
-	return total_N_matches;
-}

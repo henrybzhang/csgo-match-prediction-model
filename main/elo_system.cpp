@@ -7,11 +7,15 @@
 #include <fstream>
 #include <cmath>
 #include <algorithm>
+#include <string>
 
 extern int N_games_needed;
 extern std::vector<player_stats> total_players;
 extern std::vector<match_stats> total_matches;
 extern input base;
+
+
+std::string* player_names;
 
 bool sort_by_rating (const player_stats &p1, const player_stats &p2)
 {
@@ -20,15 +24,24 @@ bool sort_by_rating (const player_stats &p1, const player_stats &p2)
 
 void elo_system::find_player_index() {
     enough_games = true;
-    int total_N_players = base.get_N_players();
     bool found_player;
     for(int x=0; x<2; x++) {
         for(int y=0; y<5; y++) {
             found_player = false;
-            for(int p=0; p<total_N_players; p++) {
-                if(total_players[p].get_player_name() == total_matches[match_index].match_player_name(x, y)) {
-                    player_index[x][y] = p;
-                    if(total_players[p].N_played_games() < N_games_needed){
+            std::string match_player_name = total_matches[match_index].match_player_name(x, y);
+            int start = 0;
+            int upto = total_players.size();
+            while(start < upto) {
+                int mid = (start + upto) / 2;
+                if(match_player_name < player_names[mid]) {
+                    upto = mid;
+                }
+                else if(match_player_name > player_names[mid]) {
+                    start = mid + 1;
+                }
+                else{
+                    player_index[x][y] = mid;
+                    if(total_players[mid].N_played_games() < N_games_needed) {
                         enough_games = false;
                     }
                     found_player = true;
@@ -36,8 +49,8 @@ void elo_system::find_player_index() {
                 }
             }
             if(found_player == false) { // if player's name is not found in player name array
-                std::cout << total_matches[match_index].match_player_name(x, y) << '\n';
-                std::cout << "Error: could not find player '" << total_matches[match_index].match_player_name(x, y) << "'" << '\n';
+                std::cout << match_player_name << '\n';
+                std::cout << "Error: could not find player '" << match_player_name << "'" << '\n';
                 std::cout << "Match Number: " << match_index + 1 << '\n';
             }
         }
@@ -75,7 +88,7 @@ void elo_system::update_player_ratings() {
 void elo_system::main_program(int constant1) {
     elo_constant = (double) constant1 / 10;
     reset_program();
-    for(match_index=0; match_index<base.get_N_matches(); match_index++) {
+    for(match_index=0; match_index<total_matches.size(); match_index++) {
         find_player_index();
         find_team_average();
         update_player_ratings();
@@ -99,7 +112,11 @@ void elo_system::output_ratings() {
 }
 
 void elo_system::reset_program() {
-    for(int x=0; x<base.get_N_players(); x++){
+    for(int x=0; x<total_players.size(); x++) {
         total_players[x].reset_player_stats();
+    }
+    player_names = new std::string[total_players.size()];
+    for(int x=0; x<total_players.size(); x++) {
+        player_names[x] = total_players[x].get_player_name();
     }
 }

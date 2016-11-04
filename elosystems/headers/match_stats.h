@@ -10,7 +10,7 @@ class match_stats {
     double player_hltv_ratings[2][5];
 public:
     bool team0_wins;
-    void input_data(std::ifstream&);
+    void input_match_data(std::ifstream&);
     std::string get_player_name(int, int);
     double get_score(int);
     void output_data();

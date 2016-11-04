@@ -9,9 +9,9 @@ class player_stats {
     int number_of_games;
 public:
     void reset_program();
-    void input_data();
+    void input_player_data(std::ifstream&);
     std::string get_player_name();
-    double get_rating(int);
+    double get_rating();
     void add_N_games();
     void change_rating(double);
 };

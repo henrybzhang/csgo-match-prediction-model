@@ -1,5 +1,6 @@
 #include "headers/player_stats.h"
-
+#include <fstream>
+#include <iostream>
 #include <string>
 
 void player_stats::reset_program() {
@@ -7,8 +8,8 @@ void player_stats::reset_program() {
     number_of_games = 0;
 }
 
-void player_stats::input_data() {
-	pin >> name;
+void player_stats::input_player_data(std::ifstream& player_input) {
+	player_input >> name;
 }
 
 std::string player_stats::get_player_name() {

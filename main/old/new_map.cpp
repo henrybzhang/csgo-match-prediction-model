@@ -37,7 +37,7 @@ player_stats* player;
 
 void input_data()
 {
-    ifstream fin ("../data_files/old_sorted_total_data.txt"); //input match data
+    ifstream fin ("../../data_files/old_sorted_total_data.txt"); //input match data
     fin >> total_N_matches;
     match = new match_stats[total_N_matches];
     for(int m=0; m<total_N_matches; m++){
@@ -182,7 +182,7 @@ bool sort_by_rating(const player_stats &p1, const player_stats &p2)
     return p1.overall_rating>p2.overall_rating;
 }
 
-ofstream output_results ("../results/map_player_stats.txt");
+ofstream output_results ("../../results/map_player_stats.txt");
 void output_data()
 {
     // get rid of players with less than the necessary number of games
@@ -246,7 +246,7 @@ double test_program(int match_number, double k)
 }
 
 
-ofstream fout ("../results/base_predictions.txt");
+ofstream fout ("../../results/base_predictions.txt");
 void output_tests(double elo_constant, double map_constant)
 {
     fout << "Elo Constant: " << elo_constant << endl;

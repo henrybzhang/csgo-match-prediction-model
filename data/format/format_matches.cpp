@@ -70,6 +70,7 @@ int main()
 
 	ofstream fout ("../data.txt");
 	for(int m=0; m<total_N_matches; m++){
+		if(match[m].map_name == "season" || match[m].map_name == "mill" || match[m].map_name == "dust" || match[m].map_name == "tuscan") continue;
 		fout << match[m].date << " " << match[m].hour << " " << match[m].map_name << " ";
 		fout << match[m].team_name[0] << " " << match[m].score[0] << " " << match[m].team_name[1] << " " << match[m].score[1] << " ";
 		for(int x=0; x<2; x++){

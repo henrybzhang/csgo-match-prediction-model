@@ -2,7 +2,10 @@
 #include <fstream>  
 #include <iostream>
 
-void match_stats::input_match_data(std::ifstream& match_input) {
+bool match_stats::input_match_data(std::ifstream& match_input) {
+    if(match_input.eof()){
+        return false;
+    }
     match_input >> date >> hour >> map_name;
 
     for(int x=0; x<2; x++){
@@ -20,6 +23,7 @@ void match_stats::input_match_data(std::ifstream& match_input) {
             match_input >> player_hltv_ratings[x][y];
         }
     }
+    return true;
 }
 
 std::string match_stats::match_player_name(int x, int y) {
@@ -48,4 +52,8 @@ void match_stats::output_data() {
         }
     }
     std::cout << '\n';
+}
+
+std::string match_stats::get_map() {
+    return map_name;
 }

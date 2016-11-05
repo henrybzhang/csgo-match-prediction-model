@@ -11,6 +11,5 @@ def get_unique_names():
 	f = open('../player_names.txt', 'w')
 	player_list = list(set(player_list))
 	player_list.sort();
-	print >>f, len(player_list)
 	print >>f, '\n'.join(player_list)
 get_unique_names()

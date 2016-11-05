@@ -10,8 +10,6 @@
 #include "headers/input.h"
 using namespace std;
 
-int N_games_needed = 30;
-
 vector<match_stats> total_matches;
 vector<player_stats> total_players;
 input base;

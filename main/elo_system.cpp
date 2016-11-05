@@ -9,13 +9,17 @@
 #include <algorithm>
 #include <string>
 
-extern int N_games_needed;
 extern std::vector<player_stats> total_players;
 extern std::vector<match_stats> total_matches;
 extern input base;
 
-
 std::string* player_names;
+
+struct player_stats_new {
+    std::string name;
+    double rating;
+    int number_of_games;
+};
 
 bool sort_by_rating (const player_stats &p1, const player_stats &p2)
 {

@@ -61,15 +61,10 @@ void map_elo_system::find_player_index() {
 }
 
 bool map_elo_system::find_map_index() {
-    if(match_list[match_index].get_map() == "dust2") map_index = 0;
-    else if(match_list[match_index].get_map() == "mirage") map_index = 1;
-    else if(match_list[match_index].get_map() == "inferno") map_index = 2;
-    else if(match_list[match_index].get_map() == "cache") map_index = 3;
-    else if(match_list[match_index].get_map() == "overpass") map_index = 4;
-    else if(match_list[match_index].get_map() == "cobblestone") map_index = 5;
-    else if(match_list[match_index].get_map() == "train") map_index = 6;
-    else if(match_list[match_index].get_map() == "nuke") map_index = 7;
-    else{
+    for(map_index=0; map_index<8; map_index++) {
+        if(match_list[match_index].get_map() == map_list[map_index]) break;
+    }
+    if(map_index == 8) {
         std::cout << "Error: Could not find map '" << match_list[match_index].get_map()  << "'" << '\n';
         std::cout << "Match Number: " << match_index + 1 << '\n';
         return false;
@@ -178,9 +173,10 @@ void map_elo_system::test_program() {
         mean[x] = get_mean(5, team_player_ratings);
         standard_deviation[x] = get_standard_deviation(5, mean[x], team_player_ratings);
     }
-    if(mean[0] > mean[1] && match_list[match_index].team0_wins == true) N_correct_predictions++;
-    else if(mean[0] < mean[1] && match_list[match_index].team0_wins == false) N_correct_predictions++;
-    game_counter++;
+    if((mean[0] > mean[1] && match_list[match_index].team0_wins == true) || mean[0] < mean[1] && match_list[match_index].team0_wins == false){
+        N_correct_predictions[map_index]++;
+    }
+    game_counter[map_index]++;
 
     //make mean[0] the winning team's mean rating
     if(match_list[match_index].team0_wins == false){
@@ -190,16 +186,19 @@ void map_elo_system::test_program() {
 
     double zscore = (mean[0] - mean[1]) / sqrt((standard_deviation[0] * standard_deviation[0]) + (standard_deviation[1] * standard_deviation[1]));
     double probability = cdf(zscore);
-    mean_squared_error += (1 - probability) * (1 - probability);
+    mean_squared_error[map_index] += (1 - probability) * (1 - probability);
 }
 
 void map_elo_system::output_tests() {
     std::ofstream output_tests ("../results/main_predictions.txt", std::ofstream::app);
     output_tests << "Elo Constant: " << elo_constant << '\n';
-    output_tests << "Map Constant: " << map_constant << '\n';
-    output_tests << "Predicted " << N_correct_predictions << " out of " << game_counter << " games correctly." << '\n';
-    output_tests << "Percentage: " << (double) N_correct_predictions / game_counter  * 100 << '%' << '\n';
-    output_tests << "Mean Squared Error: " << mean_squared_error / game_counter << '\n' << '\n';
+    output_tests << "Map Constant: " << map_constant << '\n' << '\n';
+    for(int x=0; x<8; x++){
+        output_tests << map_list[x] << '\n';
+        output_tests << "Predicted " << N_correct_predictions[x] << " out of " << game_counter[x] << " games correctly." << '\n';
+        output_tests << "Percentage: " << (double) N_correct_predictions[x] / game_counter[x]  * 100 << '%' << '\n';
+        output_tests << "Mean Squared Error: " << mean_squared_error[x] / game_counter[x] << '\n' << '\n';
+    }
 }
 
 void map_elo_system::main_program() {
@@ -232,6 +231,17 @@ map_elo_system::map_elo_system(int constant1, int constant2) {
         player_stats_list.push_back(player);
     }
 
-    game_counter = N_correct_predictions = 0;
-    mean_squared_error = 0;
+    for(int x=0; x<8; x++) {
+        game_counter[x] = N_correct_predictions[x] = 0;
+        mean_squared_error[x] = 0;
+    }
+
+    map_list[0] = "dust2";
+    map_list[1] = "mirage";
+    map_list[2] = "inferno";
+    map_list[3] = "cache";
+    map_list[4] = "overpass";
+    map_list[5] = "cobblestone";
+    map_list[6] = "train";
+    map_list[7] = "nuke";
 }

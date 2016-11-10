@@ -11,16 +11,34 @@ bool match_stats::input_match_data(std::ifstream& match_input) {
     for(int x=0; x<2; x++){
         match_input >> team_name[x] >> score[x];
     }
-    if(score[0] > score[1]) team0_wins = true;
-    else team0_wins = false;
-    for(int x=0; x<2; x++){
-        for(int y=0; y<5; y++){
-            match_input >> player_name[x][y];
-            match_input >> player_kills[x][y];
-            match_input >> player_headshots[x][y];
-            match_input >> player_assists[x][y];
-            match_input >> player_deaths[x][y];
-            match_input >> player_hltv_ratings[x][y];
+    team0_wins = true;
+    if(score[0] < score[1]) {
+        team0_wins = false;
+        std::swap(team_name[0], team_name[1]);
+        std::swap(score[0], score[1]);
+    }
+    if(team0_wins == true){
+        for(int x=0; x<2; x++){
+            for(int y=0; y<5; y++){
+                match_input >> player_name[x][y];
+                match_input >> player_kills[x][y];
+                match_input >> player_headshots[x][y];
+                match_input >> player_assists[x][y];
+                match_input >> player_deaths[x][y];
+                match_input >> player_hltv_ratings[x][y];
+            }
+        }
+    }
+    else{
+        for(int x=1; x>=0; x--){
+            for(int y=0; y<5; y++){
+                match_input >> player_name[x][y];
+                match_input >> player_kills[x][y];
+                match_input >> player_headshots[x][y];
+                match_input >> player_assists[x][y];
+                match_input >> player_deaths[x][y];
+                match_input >> player_hltv_ratings[x][y];
+            }
         }
     }
     return true;

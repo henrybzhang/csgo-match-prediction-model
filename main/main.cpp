@@ -12,44 +12,41 @@ using namespace std;
 
 vector<match_stats> match_list;
 vector<string> player_name_list;
-vector<map_elo_system> rank_system_list;
 
 const int N_threads = 8;
 
-input base;
+input InputData;
 
 void create_rank_system(int constant1, int constant2, int index) {
-	map_elo_system rank_system(constant1, constant2);
-	rank_system_list.push_back(rank_system);
-	//rank_system.main_program();
-	rank_system_list.erase(rank_system_list.begin() + index);
+	map_elo_system *rank_system = new map_elo_system(constant1, constant2);
+	rank_system->main_program();
 }
 
 int main() {
-	base.input_data();
+	InputData.input_data();
 	
 	chrono::time_point<std::chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
-	//empty files
+	//empty the file
 	ofstream output_tests ("../results/main_predictions.txt");
 	output_tests.close();
 
-	thread threads[N_threads];
+	thread myThreads[N_threads];
 	int thread_index = 0;
 
 	for(int constant1=1; constant1<=1; constant1++) {
-		for(int constant2=1; constant2<=7; constant2++) {
-			if(thread_index < 8) {
-				threads[thread_index] = thread(create_rank_system, constant1, constant2, thread_index);
-				thread_index++;
-				continue;
+		for(int constant2=1; constant2<=1; constant2++) {
+			cout << thread_index << endl;
+			if(thread_index == N_threads){
+				for(int x=0; x<N_threads; x++) myThreads[x].join();
+				thread_index = 0;
 			}
-			for(int x=0; x<8; x++) threads[x].join();
-			thread_index = 0;
+			myThreads[thread_index] = thread(create_rank_system, constant1, constant2, thread_index);
+			thread_index++;
 		}
 	}
-	for(int x=0; x<thread_index; x++) threads[x].join();
+	for(int x=0; x<thread_index; x++) myThreads[x].join();
 
 	end = chrono::system_clock::now();
 	chrono::duration<double> elapsed_seconds = end - start;

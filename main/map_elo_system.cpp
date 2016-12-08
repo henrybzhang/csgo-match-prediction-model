@@ -72,8 +72,7 @@ void map_elo_system::find_team_average() {
     }
 }
 
-void map_elo_system::find_team_map_average()
-{
+void map_elo_system::find_team_map_average() {
     for(int x=0; x<2; x++){
         team_map_average[x] = 0;
         for(int y=0; y<5; y++){
@@ -85,6 +84,19 @@ void map_elo_system::find_team_map_average()
 }
 
 void map_elo_system::update_player_ratings() {
+    bool ChosenPlayer = false; // output match data when the player is in it
+    int PlayerTeam;
+    for(int x=0; x<2; x++) {
+        for(int y=0; y<5; y++) {
+            if(player_index[x][y] == /*player number*/){
+                ChosenPlayer = true;
+                PlayerTeam = x;
+                std::cout << PlayerTeam << '\n';
+                break;
+            }
+        }
+    }
+
     for(int x=0; x<2; x++) {
         int counter = 1 - x;
 
@@ -95,26 +107,24 @@ void map_elo_system::update_player_ratings() {
         double weighted_score = team_average[counter] * base_score;
         double map_weighted_score = team_map_average[counter] * base_score;
 
-        //std::cout << base_score << '\n';
+        if(ChosenPlayer == true && PlayerTeam == x) {
+            std::cout << base_score << " " << weighted_score << '\n';
+            std::cout << team_average[PlayerTeam] << " " << team_average[1 - PlayerTeam] << '\n';
+        }
+
         // update player ratings
         for(int y=0; y<5; y++) {
             int p = player_index[x][y];
 
             player_stats_list[p].number_of_games++;
-            //std::cout << player_stats_list[p].number_of_games << '\n';
             player_stats_list[p].map_number_of_games[map_index]++;
 
-            //std::cout << p << " ";
-            double temp = player_stats_list[p].rating;
             double expected_score = 1 / (1 + exp(team_average[counter] - player_stats_list[p].rating));
             player_stats_list[p].rating += elo_constant * (base_score - expected_score);
-            //std::cout << player_stats_list[p].rating - temp << " ";
             
             double map_expected_score = 1 / (1 + exp(team_map_average[counter] - (player_stats_list[p].map_rating[map_index] * map_constant + player_stats_list[p].rating * (1 - map_constant))));
             player_stats_list[p].map_rating[map_index] += elo_constant * (base_score - expected_score);
-            //std::cout << '\n';
         }
-        //std::cout << '\n';
     }
 }
 
@@ -154,14 +164,7 @@ double map_elo_system::cdf(double value) {
    return 0.5 * erfc(-value * 1 / sqrt(2));
 }
 
-void map_elo_system::swap(double &n1, double &n2) {
-     double temp = n1;
-     n1 = n2;
-     n2 = temp;
-}
-
 void map_elo_system::test_program() {
-    std::ofstream output_tests ("../results/main_predictions.txt", std::ofstream::app);
     double standard_deviation[2], mean[2];
     for(int x=0; x<2; x++){
         double team_player_ratings[5];
@@ -172,28 +175,12 @@ void map_elo_system::test_program() {
         mean[x] = get_mean(5, team_player_ratings);
         standard_deviation[x] = get_standard_deviation(5, mean[x], team_player_ratings);
     }
-    bool predicted_team0_wins = false;
-    if(mean[0] > mean[1]) predicted_team0_wins = true;
-
-    if((predicted_team0_wins == true && match_list[match_index].team0_wins == true) || (predicted_team0_wins == false && match_list[match_index].team0_wins == false)){
+    bool correct_prediction = false;
+    if(mean[0] > mean[1]){
         map_N_correct_predictions[map_index]++;
+        correct_prediction = true;
     }
     prediction_map_game_counter[map_index]++;
-
-    for(int x=0; x<2; x++) {
-        for(int y=0; y<5; y++) {
-            int p = player_index[x][y];
-            if((predicted_team0_wins == true && match_list[match_index].team0_wins == true) || (predicted_team0_wins == false && match_list[match_index].team0_wins == false)){
-                player_stats_list[p].player_N_correct_predictions[map_index]++;
-            }
-        }
-    }
-
-    //make mean[0] the winning team's mean rating
-    if(match_list[match_index].team0_wins == false){
-        swap(mean[0], mean[1]);
-        swap(standard_deviation[0], standard_deviation[1]);
-    }
 
     double zscore = (mean[0] - mean[1]) / sqrt((standard_deviation[0] * standard_deviation[0]) + (standard_deviation[1] * standard_deviation[1]));
     double probability = cdf(zscore);
@@ -202,6 +189,7 @@ void map_elo_system::test_program() {
     for(int x=0; x<2; x++) {
         for(int y=0; y<5; y++) {
             int p = player_index[x][y];
+            if(correct_prediction == true) player_stats_list[p].player_N_correct_predictions[map_index]++;
             player_stats_list[p].player_mean_squared_error[map_index] += (1 - probability) * (1 - probability);
             player_stats_list[p].prediction_player_game_counter[map_index]++;
         }

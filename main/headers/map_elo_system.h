@@ -25,7 +25,6 @@ class map_elo_system {
 	double get_mean(int, double[]);
 	double get_standard_deviation(int, double, double[]);
 	double cdf(double);
-	void swap(double&, double&);
 	void test_program();
 	void output_tests();
 public:
